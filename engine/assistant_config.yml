@@ -1,0 +1,111 @@
+# Arden Desktop edition — "business" or "wellness"
+edition: "business"
+assistant_name: "Arden"
+wake_words:
+  - "arden"
+  - "hey arden"
+morning_briefing_enabled: true
+
+typer_assistant:
+  assistant_name: Ada
+  human_companion_name: Dan
+  ears: realtime-stt
+  brain: deepseek-v3 # only deepseek-v3
+  voice: elevenlabs # local, elevenlabs
+  elevenlabs_voice: WejK3H1m7MI9CHnIjW9K
+
+base_assistant:
+  assistant_name: Arden
+  human_companion_name: Dave
+  ears: none
+  brain: kobold
+  voice: none
+  elevenlabs_voice: WejK3H1m7MI9CHnIjW9K
+
+# Speech-to-text (Phase 5 voice) — CPU-first to preserve M40 VRAM for KoboldCpp
+stt:
+  provider: realtime-stt
+  model: small.en          # upgrade from tiny.en when voice enabled
+  device: cpu              # cpu | cuda — use cuda only if CPU latency is unacceptable
+  compute_type: int8       # int8 on CPU is fast; float16 only if device: cuda
+  language: en
+
+# Brain Backend Configuration - Phase 4: Brain Swapping
+# "Keep the soul, change the brain" - personality/memory persist across backends
+brain:
+  default: "kobold"
+  fallback_chain: ["kobold", "ollama", "groq"]
+
+# Backend Configurations
+# KoboldCpp configuration (llama.cpp CUDA 11 — Tesla M40 / Old PC build)
+# Model: Gemma 4 12B multimodal (Unsloth fine-tune) — personal assistant brain
+kobold:
+  base_url: "http://127.0.0.1:5001/v1"
+  model: "koboldcpp/gemma-4-12b-it-UD-Q5_K_XL"
+  timeout: 90
+
+# LM Studio configuration (OpenAI-compatible local LLM)
+lm_studio:
+  base_url: "http://localhost:1234/v1"
+  model: "local-model"  # LM Studio typically uses "local-model" or specific model name
+  timeout: 30
+
+# Ollama configuration (local models)
+ollama:
+  base_url: "http://localhost:11434"
+  model: "llama3.1:8b"  # Or phi4, qwen2.5, etc - must be pulled first
+  timeout: 60  # Ollama can be slower
+
+# Claude configuration (cloud API - requires API key)
+claude:
+  model: "claude-3-sonnet-20240229"  # or claude-3-opus, claude-3-haiku
+  api_key: ""  # Set via environment variable ANTHROPIC_API_KEY recommended
+
+# OpenAI configuration (cloud API - requires API key)
+openai:
+  model: "gpt-3.5-turbo"  # or gpt-4, gpt-4-turbo, etc
+  api_key: ""  # Set via environment variable OPENAI_API_KEY recommended
+
+# Groq configuration (cloud API - requires API key)
+groq:
+  base_url: "https://api.groq.com/openai/v1"
+  model: "llama-3.3-70b-versatile"
+  timeout: 30
+
+# Venice AI configuration (cloud API — privacy-oriented, optional override)
+venice:
+  base_url: "https://api.venice.ai/api/v1"
+  model: "llama-3.3-70b"
+  api_key: ""  # Set via VENICE_API_KEY — whitelist api.venice.ai if using NextDNS
+
+# Google Gemini configuration (cloud API — optional override, NOT local Gemma)
+gemini:
+  model: "gemini-2.0-flash"
+  api_key: ""  # Set via GEMINI_API_KEY or GOOGLE_API_KEY
+
+# Memory Vault configuration (optional)
+memory:
+  enabled: true
+  backend: neo4j   # neo4j (Dave) | sqlite (Brittany consumer — no Docker)
+  sqlite_path: "data/consumer_memory.db"
+  neo4j:
+    uri: "bolt://localhost:7687"
+    user: "neo4j"
+    password: "password"
+  chroma:
+    persist_directory: "data/chroma"
+
+# Personality engine configuration (optional)
+personality:
+  default_profile: "sam"
+  profiles_dir: "profiles"
+
+# Data paths
+data:
+  tasks_db_path: "data/tasks.db"
+
+# Telegram Bridge (Business Edition)
+# Get token from @BotFather on Telegram — message /newbot
+telegram_bot_token: ""
+# Get your user ID from @userinfobot on Telegram
+telegram_user_id: ""

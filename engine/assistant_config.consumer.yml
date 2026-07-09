@@ -1,0 +1,74 @@
+# Arden Desktop consumer edition — cloud default, optional local Kobold on :5001
+# Set: ARDEN_CONFIG=assistant_config.consumer.yml
+
+edition: "consumer"
+assistant_name: "Arden"
+wake_words:
+  - "arden"
+  - "hey arden"
+morning_briefing_enabled: false
+
+intake:
+  domain_pack: "consumer"
+
+base_assistant:
+  assistant_name: Arden
+  human_companion_name: ""
+  ears: none
+  brain: venice
+  voice: none
+
+stt:
+  provider: realtime-stt
+  model: small.en
+  device: cpu
+  compute_type: int8
+  language: en
+
+brain:
+  default: "venice"
+  fallback_chain: ["kobold", "venice", "groq"]
+
+kobold:
+  base_url: "http://127.0.0.1:5001/v1"
+  model: "local-model"
+  timeout: 90
+
+groq:
+  base_url: "https://api.groq.com/openai/v1"
+  model: "llama-3.3-70b-versatile"
+  timeout: 30
+
+venice:
+  base_url: "https://api.venice.ai/api/v1"
+  model: "llama-3.3-70b"
+  timeout: 60
+
+claude:
+  model: "claude-3-5-sonnet-20241022"
+  api_key: ""
+
+# Consumer: SQLite + Chroma (portable) — Brittany edition (no Docker)
+# Until then, memory may be limited in consumer builds
+memory:
+  enabled: true
+  backend: sqlite
+  embedding:
+    backend: hash
+  sqlite_path: "data/consumer_memory.db"
+  chroma:
+    persist_directory: "data/chroma"
+  neo4j:
+    uri: "bolt://localhost:7687"
+    user: "neo4j"
+    password: "password"
+
+personality:
+  default_profile: "arden"
+  profiles_dir: "profiles"
+
+data:
+  tasks_db_path: "data/tasks.db"
+
+telegram_bot_token: ""
+telegram_user_id: ""

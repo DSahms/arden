@@ -1,0 +1,21 @@
+{
+    "chat.tools.terminal.autoApprove": {
+        "pytest": true,
+        "/^python -m pytest -q$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^C:/Users/david/Projects/PersonaLock/\\.venv/Scripts/python\\.exe -m pytest -q$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^C:/Users/david/Projects/PersonaLock/\\.venv/Scripts/python\\.exe -m pytest tests/test_integration\\.py::test_conversation_flow -q$/": {
+            "approve": true,
+            "matchCommandLine": true
+        },
+        "/^C:/Users/david/Projects/PersonaLock/\\.venv/Scripts/python\\.exe -m py_compile modules\\\\base_assistant\\.py$/": {
+            "approve": true,
+            "matchCommandLine": true
+        }
+    }
+}

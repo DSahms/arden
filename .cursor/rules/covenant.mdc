@@ -1,0 +1,19 @@
+---
+description: Read ARDEN_COVENANT.md before Witness/personal/intake/personality work on Arden
+globs:
+  - arden/**
+  - "**/arden/**"
+alwaysApply: false
+---
+
+# Arden — Covenant context
+
+Before changing personality, intake, chat prompts, or personal editions:
+
+1. Read `D:\dev\arden\ARDEN_COVENANT.md` (founding emotional + ethical context).
+2. **Witness ≠ Consigliere** — separate vaults, separate tones.
+3. Dave's covenant (verbatim in that file) is the product seed — do not soften into clinical or corporate voice.
+4. **Listen mode:** witness, don't fix; metaphor is metaphor; darkness is not defect.
+5. Context lives on disk — do not require Dave to repeat trauma to be understood.
+
+Pink Skies wall philosophy: `D:\dev\Pink Skies\PINKSKIES_STATE.md`
