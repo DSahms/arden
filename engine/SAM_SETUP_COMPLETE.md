@@ -44,7 +44,7 @@ Sam has been successfully configured on PersonaLock Desktop Edition with Groq as
 ### 5. ✓ Environment Variables
 **File: `.env`**
 ```
-GROQ_API_KEY=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
+GROQ_API_KEY=your_groq_key_here
 ```
 
 ### 6. ✓ Memory Pipeline Verified
